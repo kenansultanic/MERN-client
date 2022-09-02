@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -15,8 +15,28 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import WaveImage from "../images/wave.svg";
 import ShapeImage from "../images/shape.svg";
+import axios from "axios";
 
 export default function Register() {
+
+  const [first_name, setFirst_name] = useState("")
+  const [last_name, setLast_name] = useState("")
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const funk = () => {
+    const obj = {
+      "first_name": first_name,
+      "last_name": last_name,
+      "username": username,
+      "email": email,
+      "password": password
+    }
+
+    axios.post('http://localhost:3001/user/register',obj)
+  }
+
   return (
     <Box
       sx={{
@@ -54,6 +74,28 @@ export default function Register() {
           <Typography variant="h2">Welcome</Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
+              id="first_name"
+              name="first_name"
+              label="First name"
+              variant="outlined"
+              autoComplete="First Name"
+              margin="normal"
+              required
+              fullWidth
+              onChange={(e) => { setFirst_name(e.target.value) }}
+            />
+            <TextField
+              id="last_name"
+              name="last_name"
+              label="Last name"
+              variant="outlined"
+              autoComplete="Last name"
+              margin="normal"
+              required
+              fullWidth
+              onChange={(e) => { setLast_name(e.target.value) }}
+            />
+            <TextField
               id="username"
               name="username"
               label="Your username"
@@ -61,6 +103,7 @@ export default function Register() {
               margin="normal"
               required
               fullWidth
+              onChange={(e) => { setUsername(e.target.value) }}
             />
             <TextField
               id="email"
@@ -71,6 +114,18 @@ export default function Register() {
               margin="normal"
               required
               fullWidth
+              onChange={(e) => { setEmail(e.target.value) }}
+            />
+            <TextField
+              id="password"
+              name="password"
+              label="Password"
+              variant="outlined"
+              autoComplete="password"
+              margin="normal"
+              required
+              fullWidth
+              onChange={(e) => { setPassword(e.target.value) }}
             />
             <Button
               type="submit"
@@ -79,15 +134,16 @@ export default function Register() {
               size="large"
               fullWidth
               sx={{ mt: 3, mb: 3 }}
+              onClick={funk}
             >
-              Login
+              Register
             </Button>
           </Box>
           <Typography variant="h6" sx={{ mb: 3 }}>
-            Don't have an account?
+            Already have an account?
           </Typography>
           <Button color="secondary" variant="outlined" size="large">
-            Register
+            Login
           </Button>
         </Box>
       </Container>
