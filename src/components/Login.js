@@ -1,18 +1,9 @@
 import {AppBar, Box, Button, Container, React, TextField, Toolbar, Typography} from '@mui/material'
 import ShapeImage from "../images/shape.svg";
-import { useState, useEffect } from 'react';
 
 import Footer from './Footer'
 
-const Register = () =>  {
-
-  const [name, setName] = useState('')
-  const [surname, setSurname] = useState('')
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-
+const Login = () =>  {
   return (
     <Box
       sx={{
@@ -47,46 +38,16 @@ const Register = () =>  {
           }}
         >
           <Typography variant="h3">Naziv aplikacije</Typography>
+          <Typography variant="h2">Welcome</Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
-            <TextField
-              id="first_name"
-              name="first_name"
-              label="Your name"
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              onChange={e => setName(e.target.value)}
-            />
-            <TextField
-              id="last_name"
-              name="last_name"
-              label="Your surname"
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              onChange={e => setSurname(e.target.value)}
-            />
-            <TextField
-              id="email"
-              name="email"
-              label="E-mail"
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              onChange={e => setEmail(e.target.value)}
-            />
             <TextField
               id="username"
               name="username"
-              label="Username"
+              label="Your username"
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              onChange={e => setUsername(e.target.value)}
             />
             <TextField
               id="password"
@@ -97,7 +58,6 @@ const Register = () =>  {
               margin="normal"
               required
               fullWidth
-              onChange={e => setPassword(e.target.value)}
             />
             <Button
               type="submit"
@@ -110,8 +70,11 @@ const Register = () =>  {
               Login
             </Button>
           </Box>
+          <Typography variant="h6" sx={{ mb: 3 }}>
+            Don't have an account?
+          </Typography>
           <Button color="secondary" variant="outlined" size="large">
-            Login instead
+            Register
           </Button>
         </Box>
       </Container>
@@ -120,4 +83,4 @@ const Register = () =>  {
   );
 }
 
-export default Register
+export default Login
