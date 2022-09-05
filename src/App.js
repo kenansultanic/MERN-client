@@ -2,10 +2,18 @@
 import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import Login from '../src/components/Login'
+import Register from '../src/components/Register'
 
-function App() {
 
-  
+const App = () => {
+
+  return (
+    <>
+    <Login />
+    <Register/>
+    </>
+  )
 
      
   
