@@ -1,7 +1,7 @@
 import {AppBar, Box, Button, Container, React, TextField, Toolbar, Typography} from '@mui/material'
 import ShapeImage from "../images/shape.svg";
 import { useState } from 'react';
-import DataFinder from '../Apis/DataFinder';
+import AxiosClient from '../Apis/AxiosClient';
 import Footer from './Footer'
 
 const Register = () =>  {
@@ -12,7 +12,7 @@ const Register = () =>  {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const sendObject = () => {
+  const RegisterUser = () => {
       const obj = {
         "first_name": name,
         "last_name": surname,
@@ -21,7 +21,7 @@ const Register = () =>  {
         "password": password
       }
   
-      DataFinder.post('/user/register',obj)
+      AxiosClient.post('/user/register',obj)
   }
 
 
@@ -120,7 +120,7 @@ const Register = () =>  {
               size="large"
               fullWidth
               sx={{ mt: 3, mb: 3 }}
-              onClick={sendObject}
+              onClick={RegisterUser}
             >
               Register
             </Button>
