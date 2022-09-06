@@ -3,8 +3,27 @@ import ShapeImage from "../images/shape.svg"
 import {Link} from 'react-router-dom'
 import Footer from './Footer'
 import '../styles/index.css'
+import { useState } from 'react'
+import swal from 'sweetalert';
+import AxiosClient from '../Apis/AxiosClient'
 
 const Login = () =>  {
+
+  const [username,setUsername] = useState("")
+  const [password,setPassword] = useState("")
+
+
+  const loginUser = () => {
+    const userData = {
+        "username": username,
+        "password": password
+    }
+    AxiosClient.post('/users/login-user',userData).then(
+      res => {if(res.status === 200)
+        window.location.replace("/home")
+      else {console.error(res.data.message)}}
+    )
+  }
   return (
     <Box
       sx={{
@@ -48,6 +67,7 @@ const Login = () =>  {
               variant="outlined"
               margin="normal"
               required
+              onChange={(e)=>{setUsername(e.target.value)}}
               fullWidth
             />
             <TextField
@@ -58,6 +78,7 @@ const Login = () =>  {
               variant="outlined"
               margin="normal"
               required
+              onChange={(e)=>{setPassword(e.target.value)}}
               fullWidth
             />
             <Button
@@ -66,6 +87,7 @@ const Login = () =>  {
               variant="contained"
               size="large"
               fullWidth
+              onClick={loginUser}
               sx={{ mt: 3, mb: 3 }}
             >
               Login
