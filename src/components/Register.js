@@ -1,8 +1,10 @@
 import {AppBar, Box, Button, Container, React, TextField, Toolbar, Typography} from '@mui/material'
-import ShapeImage from "../images/shape.svg";
-import { useState } from 'react';
-import AxiosClient from '../Apis/AxiosClient';
+import ShapeImage from "../images/shape.svg"
+import { useState } from 'react'
+import AxiosClient from '../Apis/AxiosClient'
 import Footer from './Footer'
+import {Link} from 'react-router-dom'
+import '../styles/index.css'
 
 const Register = () =>  {
 
@@ -125,9 +127,11 @@ const Register = () =>  {
               Register
             </Button>
           </Box>
-          <Button color="secondary" variant="outlined" size="large">
-            Login instead
-          </Button>
+          <Link to={'/'}>
+            <Button color="secondary" variant="outlined" size="large">
+              Login instead
+            </Button>
+          </Link>
         </Box>
       </Container>
       <Footer/>
