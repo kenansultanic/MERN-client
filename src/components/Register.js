@@ -1,7 +1,7 @@
 import {AppBar, Box, Button, Container, React, TextField, Toolbar, Typography} from '@mui/material'
 import ShapeImage from "../images/shape.svg";
-import { useState, useEffect } from 'react';
-
+import { useState } from 'react';
+import AxiosClient from '../Apis/AxiosClient';
 import Footer from './Footer'
 
 const Register = () =>  {
@@ -11,6 +11,18 @@ const Register = () =>  {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const RegisterUser = () => {
+      const obj = {
+        "first_name": name,
+        "last_name": surname,
+        "username": username,
+        "email": email,
+        "password": password
+      }
+  
+      AxiosClient.post('/user/register',obj)
+  }
 
 
   return (
@@ -67,6 +79,7 @@ const Register = () =>  {
               required
               fullWidth
               onChange={e => setSurname(e.target.value)}
+
             />
             <TextField
               id="email"
@@ -98,6 +111,7 @@ const Register = () =>  {
               required
               fullWidth
               onChange={e => setPassword(e.target.value)}
+
             />
             <Button
               type="submit"
@@ -106,8 +120,9 @@ const Register = () =>  {
               size="large"
               fullWidth
               sx={{ mt: 3, mb: 3 }}
+              onClick={RegisterUser}
             >
-              Login
+              Register
             </Button>
           </Box>
           <Button color="secondary" variant="outlined" size="large">

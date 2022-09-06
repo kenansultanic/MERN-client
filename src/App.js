@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import Login from '../src/components/Login'
@@ -10,8 +9,7 @@ const App = () => {
 
   return (
     <>
-    <Login />
-    <Register/>
+      <Register/>
     </>
   )
 
