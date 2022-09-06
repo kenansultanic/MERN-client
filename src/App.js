@@ -1,20 +1,21 @@
 /* eslint-disable no-unused-vars */
 import {useState, useEffect} from 'react'
 import axios from 'axios'
-import Login from '../src/components/Login'
-import Register from '../src/components/Register'
-
+import {BrowserRouter as Router} from "react-router-dom"
+import {Routes, Route} from "react-router"
+import Login from './components/Login'
+import Register from './components/Register'
 
 const App = () => {
-
+    
   return (
-    <>
-      <Register/>
-    </>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+      </Routes>
+    </Router>
   )
-
-     
-  
 }
 
 export default App;

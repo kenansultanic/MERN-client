@@ -1,7 +1,8 @@
 import {AppBar, Box, Button, Container, React, TextField, Toolbar, Typography} from '@mui/material'
-import ShapeImage from "../images/shape.svg";
-
+import ShapeImage from "../images/shape.svg"
+import {Link} from 'react-router-dom'
 import Footer from './Footer'
+import '../styles/index.css'
 
 const Login = () =>  {
   return (
@@ -73,9 +74,11 @@ const Login = () =>  {
           <Typography variant="h6" sx={{ mb: 3 }}>
             Don't have an account?
           </Typography>
-          <Button color="secondary" variant="outlined" size="large">
-            Register
-          </Button>
+          <Link to={'/register'}>
+            <Button color="secondary" variant="outlined" size="large">
+              Register
+            </Button>
+          </Link>
         </Box>
       </Container>
       <Footer/>
