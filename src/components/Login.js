@@ -15,8 +15,8 @@ const Login = () =>  {
 
   const loginUser = () => {
     const userData = {
-        "username": username,
-        "password": password
+        username: username,
+        password: password
     }
     AxiosClient.post('/users/login-user',userData).then(
       res => {if(res.status === 200)
