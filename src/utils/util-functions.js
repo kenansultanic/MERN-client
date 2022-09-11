@@ -1,4 +1,5 @@
 const usernameRegex = /^[a-z0-9_.]+$/
+const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 const util = {
     isValidUsername: username => {
@@ -9,6 +10,11 @@ const util = {
             return false
         
         return username.match(usernameRegex)
+    },
+    isValidEmail: email => {
+        return String(email)
+            .toLowerCase()
+            .match(emailRegex)
     }
 }
 
