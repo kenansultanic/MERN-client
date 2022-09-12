@@ -1,10 +1,12 @@
-import {AppBar, Box, Button, Container, React, TextField, Toolbar, Typography} from '@mui/material'
+import {Alert, AppBar, Box, Button, Container, React, TextField, Toolbar, Typography} from '@mui/material'
 import ShapeImage from "../images/shape.svg"
 import { useState } from 'react'
 import AxiosClient from '../Apis/AxiosClient'
 import Footer from './Footer'
 import {Link} from 'react-router-dom'
-import '../styles/index.css'
+import '../styles/register.css'
+import util from '../utils/util-functions'
+import schema from '../utils/validate-password'
 
 const Register = () =>  {
 
@@ -13,8 +15,28 @@ const Register = () =>  {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [alertMessage, setAlertMessage] = useState('')
+  const [displayAlert, setDisplayAlert] = useState(false)
 
-  const RegisterUser = () => {
+  const RegisterUser = e => {
+      e.preventDefault()
+
+      if (!util.isValidEmail(email)) {
+          setAlertMessage('Invalid email format')
+          setDisplayAlert(true)
+          return
+      }
+      if (!util.isValidUsername(username)) {
+        setAlertMessage('Invalid username format')
+        setDisplayAlert(true)
+        return
+      }
+      if (!schema.validate(password)) {
+        setAlertMessage('Password must contain 8-20 characters and include at least one capital letter and number')
+        setDisplayAlert(true)
+        return
+      }
+
       const obj = {
         "first_name": name,
         "last_name": surname,
@@ -61,6 +83,9 @@ const Register = () =>  {
           }}
         >
           <Typography variant="h3">Naziv aplikacije</Typography>
+          <div className={displayAlert ? 'alert-container display-alert' : 'alert-container'}>
+            <Alert severity={'warning'} onClose={() => setDisplayAlert(false)}>{alertMessage}</Alert>
+          </div>
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               id="first_name"

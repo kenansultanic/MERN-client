@@ -1,4 +1,4 @@
-import {AppBar, Box, Button, Container, React, TextField, Toolbar, Typography} from '@mui/material'
+import {Alert, AppBar, Box, Button, Container, React, TextField, Toolbar, Typography} from '@mui/material'
 import ShapeImage from "../images/shape.svg"
 import {Link} from 'react-router-dom'
 import Footer from './Footer'
@@ -11,18 +11,27 @@ const Login = () =>  {
 
   const [username,setUsername] = useState("")
   const [password,setPassword] = useState("")
+  const [alertMessage, setAlertMessage] = useState('')
+  const [displayAlert, setDisplayAlert] = useState(false)
 
+  const loginUser = e => {
+    e.preventDefault()
 
-  const loginUser = () => {
     const userData = {
         username: username,
         password: password
     }
-    AxiosClient.post('/users/login-user',userData).then(
+    AxiosClient.post('/users/login-user',userData)
+    .then(
       res => {if(res.status === 200)
         window.location.replace("/home")
       else {console.error(res.data.message)}}
     )
+    .catch(error => {
+      setAlertMessage('Wrong usernama and password combination or user doesnt exist')
+      setDisplayAlert(true)
+      console.error(error)
+    })
   }
   return (
     <Box
@@ -59,6 +68,9 @@ const Login = () =>  {
         >
           <Typography variant="h3">Naziv aplikacije</Typography>
           <Typography variant="h2">Welcome</Typography>
+          <div className={displayAlert ? 'alert-container display-alert' : 'alert-container'}>
+            <Alert severity={'warning'} onClose={() => setDisplayAlert(false)}>{alertMessage}</Alert>
+          </div>
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               id="username"
